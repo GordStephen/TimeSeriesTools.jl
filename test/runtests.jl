@@ -1,6 +1,5 @@
-using TimeSeriesTools
-using Base.Test
+using FactCheck, TimeSeriesTools 
 
-#TODO: Write tests
+include("data_quality.jl")
 
-@test 1 == 1
+exitstatus()
