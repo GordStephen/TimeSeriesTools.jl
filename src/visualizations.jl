@@ -61,21 +61,21 @@ function acf(ta::TimeArray; naive=false, lags=1:30)
   naive || require_clean(ta)
   length(ta.colnames) > 1 ? error("Subplotting not yet supported. Use a single-column TimeArray.") :
   conf_int = 1.96 / sqrt(length(ta))
-  plot(x=lags, y=autocor(ta.values, lags), xmin=collect(lags)-.1, xmax=lags, yintercept=[-conf_int, +conf_int], Geom.bar, Geom.hline(color="orange"), Scale.y_continuous(minvalue=-1, maxvalue=1), Guide.xlabel("lags"), Guide.ylabel(""), Guide.title(ta.colnames[1]*" ACF"))
+  plot(x=lags, y=autocor(ta.values, lags), xmin=collect(lags)-.1, xmax=lags, yintercept=[-conf_int, +conf_int], Geom.bar, Geom.hline(color=colorant"orange"), Scale.y_continuous(minvalue=-1, maxvalue=1), Guide.xlabel("lags"), Guide.ylabel(""), Guide.title(ta.colnames[1]*" ACF"))
 end # acf
 
 function pacf(ta::TimeArray; naive=false, lags=1:30)
   naive || require_clean(ta)
   length(ta.colnames) > 1 ? error("Subplotting not yet supported. Use a single-column TimeArray.") :
   conf_int = 1.96 / sqrt(length(ta))
-  plot(x=lags, y=pacf(ta.values, lags), xmin=collect(lags)-.1, xmax=lags, yintercept=[-conf_int, +conf_int], Geom.bar, Geom.hline(color="orange"), Scale.y_continuous(minvalue=-1, maxvalue=1), Guide.xlabel("lags"), Guide.ylabel(""), Guide.title(ta.colnames[1]*" PACF"))
+  plot(x=lags, y=pacf(ta.values, lags), xmin=collect(lags)-.1, xmax=lags, yintercept=[-conf_int, +conf_int], Geom.bar, Geom.hline(color=colorant"orange"), Scale.y_continuous(minvalue=-1, maxvalue=1), Guide.xlabel("lags"), Guide.ylabel(""), Guide.title(ta.colnames[1]*" PACF"))
 end # pacf
 
 function ccf(ta::TimeArray; naive=false, lags=-15:15)
   naive || require_clean(ta)
   length(ta.colnames) != 2 ? error("`ccf` requires a 2-column TimeArray") :
   conf_int = 1.96 / sqrt(length(ta))
-  plot(x=lags, y=crosscor(ta[ta.colnames[1]].values, ta[ta.colnames[2]].values, lags), xmin=collect(lags)-.1, xmax=lags, yintercept=[-conf_int, +conf_int], Geom.bar, Geom.hline(color="orange"), Scale.y_continuous(minvalue=-1, maxvalue=1), Guide.xlabel("lags"), Guide.ylabel(""), Guide.title(ta.colnames[1]*", "*ta.colnames[2]*" CCF"))
+  plot(x=lags, y=crosscor(ta[ta.colnames[1]].values, ta[ta.colnames[2]].values, lags), xmin=collect(lags)-.1, xmax=lags, yintercept=[-conf_int, +conf_int], Geom.bar, Geom.hline(color=colorant"orange"), Scale.y_continuous(minvalue=-1, maxvalue=1), Guide.xlabel("lags"), Guide.ylabel(""), Guide.title(ta.colnames[1]*", "*ta.colnames[2]*" CCF"))
 end # ccf
 
 # Spectral analysis
